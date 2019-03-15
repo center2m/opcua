@@ -11,9 +11,16 @@ import (
 
 	"github.com/gopcua/opcua"
 	"github.com/gopcua/opcua/debug"
-	"github.com/gopcua/opcua/id"
 	"github.com/gopcua/opcua/ua"
 )
+
+type NodeDef struct {
+	NodeID      *ua.NodeID
+	Path        string
+	DataType    string
+	Writable    bool
+	Description string
+}
 
 func join(a, b string) string {
 	if a == "" {
@@ -22,32 +29,66 @@ func join(a, b string) string {
 	return a + "." + b
 }
 
-func browse(n *opcua.Node, path string, level int) ([]string, error) {
+func browse(n *opcua.Node, path string, level int) ([]NodeDef, error) {
+	fmt.Printf("node:%s path:%q level:%d\n", n, path, level)
 	if level > 10 {
 		return nil, nil
 	}
-	// nodeClass, err := n.NodeClass()
-	// if err != nil {
-	// 	return nil, err
-	// }
+	nodeClass, err := n.NodeClass()
+	if err != nil {
+		return nil, err
+	}
 	browseName, err := n.BrowseName()
 	if err != nil {
 		return nil, err
 	}
-	path = join(path, browseName.Name)
-
-	typeDefs := ua.NewTwoByteNodeID(id.HasTypeDefinition)
-	refs, err := n.References(typeDefs)
+	descr, err := n.Description()
 	if err != nil {
 		return nil, err
 	}
-	// todo(fs): example still incomplete
-	log.Printf("refs: %#v err: %v", refs, err)
+	// accessLevel, err := n.AccessLevel()
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// writable := ua.AccessLevelType(accessLevel)&ua.AccessLevelTypeCurrentWrite == ua.AccessLevelTypeCurrentWrite
+	writable := false
+
+	path = join(path, browseName.Name)
+
+	switch nodeClass {
+	case ua.NodeClassObject:
+		var nodes []NodeDef
+		children, err := n.Children(0, 0)
+		if err != nil {
+			return nil, err
+		}
+		for _, cn := range children {
+			childnodes, err := browse(cn, path, level+1)
+			if err != nil {
+				return nil, err
+			}
+			nodes = append(nodes, childnodes...)
+		}
+		return nodes, nil
+
+	case ua.NodeClassVariable:
+		return []NodeDef{
+			{
+				NodeID:      n.ID,
+				Path:        path,
+				Description: descr.Text,
+				Writable:    writable,
+				DataType:    "???",
+			},
+		}, nil
+
+	}
 	return nil, nil
 }
 
 func main() {
 	endpoint := flag.String("endpoint", "opc.tcp://localhost:4840", "OPC UA Endpoint URL")
+	nodeID := flag.String("node", "", "node id for the root node")
 	flag.BoolVar(&debug.Enable, "debug", false, "enable debug logging")
 	flag.Parse()
 	log.SetFlags(0)
@@ -58,9 +99,12 @@ func main() {
 	}
 	defer c.Close()
 
-	root := c.Node(ua.NewStringNodeID(1, "Root"))
+	id, err := ua.ParseNodeID(*nodeID)
+	if err != nil {
+		log.Fatalf("invalid node id: %s", err)
+	}
 
-	nodeList, err := browse(root, "", 0)
+	nodeList, err := browse(c.Node(id), "", 0)
 	if err != nil {
 		log.Fatal(err)
 	}
