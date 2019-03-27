@@ -5,6 +5,7 @@
 package ua
 
 import (
+	"bytes"
 	"fmt"
 	"time"
 )
@@ -384,4 +385,27 @@ func (m *Variant) Time() time.Time {
 	default:
 		return time.Time{}
 	}
+}
+
+func (m *Variant) GoString() string {
+	var b bytes.Buffer
+	b.WriteString("&ua.Variant{")
+	mask := fmt.Sprintf("ua.%s", m.Type())
+	if m.Has(VariantArrayValues) {
+		mask += "|ua.VariantArrayValues"
+	}
+	if m.Has(VariantArrayDimensions) {
+		mask += "|ua.VariantArrayDimensions"
+	}
+	b.WriteString("EncodingMask:" + mask)
+	if m.Has(VariantArrayValues) {
+		b.WriteString(fmt.Sprintf(", ArrayLength:%d", m.ArrayLength))
+	}
+	if m.Has(VariantArrayDimensions) {
+		b.WriteString(fmt.Sprintf(", ArrayDimensionsLength:%d", m.ArrayDimensionsLength))
+		b.WriteString(fmt.Sprintf(", ArrayDimensions:%#v", m.ArrayDimensions))
+	}
+	b.WriteString(fmt.Sprintf(", Value:%#v", m.Value))
+	b.WriteString("}")
+	return b.String()
 }
