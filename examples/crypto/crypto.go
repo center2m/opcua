@@ -139,7 +139,7 @@ func clientOptsFromFlags(endpoints []*ua.EndpointDescription) []opcua.Option {
 	case strings.HasPrefix(*policy, uapolicy.SecurityPolicyURL):
 		secPolicy = *policy
 		*policy = ""
-	case *policy == "Basic128Rsa15" || *policy == "Basic256" || *policy == "Basic256Sha256":
+	case *policy == "None" || *policy == "Basic128Rsa15" || *policy == "Basic256" || *policy == "Basic256Sha256" || *policy == "Aes128_Sha256_RsaOaep" || *policy == "Aes256_Sha256_RsaPss":
 		secPolicy = uapolicy.SecurityPolicyURL + *policy
 		*policy = ""
 	default:

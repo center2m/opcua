@@ -13,6 +13,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/gopcua/opcua/debug"
 	"github.com/gopcua/opcua/ua"
 	"github.com/gopcua/opcua/uacp"
 	"github.com/gopcua/opcua/uasc"
@@ -109,12 +110,32 @@ func (c *Client) Dial() error {
 		_ = conn.Close()
 		return err
 	}
+	c.sechan = sechan
+	go c.monitorChannel(context.TODO())
+
 	if err := sechan.Open(); err != nil {
 		_ = conn.Close()
+		c.sechan = nil
 		return err
 	}
-	c.sechan = sechan
+
 	return nil
+}
+
+func (c *Client) monitorChannel(ctx context.Context) error {
+	for {
+		select {
+		case <-ctx.Done():
+			return nil
+		default:
+			msg := c.sechan.Receive(ctx)
+			debug.Printf("Received unsolicited message from server: %T", msg.V)
+			if msg.Err != nil {
+				debug.Printf("Received error: %s", msg.Err)
+				return msg.Err
+			}
+		}
+	}
 }
 
 // Close closes the session and the secure channel.

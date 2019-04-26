@@ -12,6 +12,8 @@ import (
 	"errors"
 	"fmt"
 	"sort"
+
+	"github.com/gopcua/opcua/ua"
 )
 
 const (
@@ -176,4 +178,20 @@ var policies = map[string]policy{
 type policy struct {
 	asymmetric func(localKey *rsa.PrivateKey, remoteKey *rsa.PublicKey) (*EncryptionAlgorithm, error)
 	symmetric  func(localNonce []byte, remoteNonce []byte) (*EncryptionAlgorithm, error)
+}
+
+// SecurityLevel returns the recommended security level for endpoints
+// It is a ranking of security quality, higher is better
+var securityLevels = map[string][4]uint8{
+	// Array indicies are : {Invalid, None, Sign, SignAndEncrypt}
+	SecurityPolicyNone:                {00, 01, 00, 00},
+	SecurityPolicyBasic128Rsa15:       {00, 00, 12, 13},
+	SecurityPolicyBasic256:            {00, 00, 22, 23},
+	SecurityPolicyBasic256Sha256:      {00, 00, 32, 33},
+	SecurityPolicyAes128Sha256RsaOaep: {00, 00, 42, 43},
+	SecurityPolicyAes256Sha256RsaPss:  {00, 00, 52, 53},
+}
+
+func SecurityLevel(policy string, mode ua.MessageSecurityMode) uint8 {
+	return securityLevels[policy][mode]
 }
