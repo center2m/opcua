@@ -10,7 +10,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/gopcua/opcua/debug"
+	"github.com/center2m/opcua/debug"
 )
 
 // debugCodec enables printing of debug messages in the opcua codec.

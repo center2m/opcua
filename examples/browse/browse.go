@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gopcua/opcua"
-	"github.com/gopcua/opcua/debug"
-	"github.com/gopcua/opcua/id"
-	"github.com/gopcua/opcua/ua"
+	"github.com/center2m/opcua"
+	"github.com/center2m/opcua/debug"
+	"github.com/center2m/opcua/id"
+	"github.com/center2m/opcua/ua"
 	"github.com/pkg/errors"
 )
 

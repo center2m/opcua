@@ -7,7 +7,7 @@ package ua
 import (
 	"fmt"
 
-	"github.com/gopcua/opcua/id"
+	"github.com/center2m/opcua/id"
 )
 
 // These flags define the value type of an ExtensionObject.

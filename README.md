@@ -15,9 +15,9 @@ A native Go implementation of the OPC/UA Binary Protocol.
 You need go1.11 or higher. We test with the current and previous Go version.
 
 [![CircleCI](https://circleci.com/gh/gopcua/opcua.svg?style=shield)](https://circleci.com/gh/gopcua/opcua)
-[![GoDoc](https://godoc.org/github.com/gopcua/opcua?status.svg)](https://godoc.org/github.com/gopcua/opcua)
-[![GolangCI](https://golangci.com/badges/github.com/gopcua/opcua.svg)](https://golangci.com/r/github.com/gopcua/opcua)
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/gopcua/opcua/blob/master/LICENSE)
+[![GoDoc](https://godoc.org/github.com/center2m/opcua?status.svg)](https://godoc.org/github.com/center2m/opcua)
+[![GolangCI](https://golangci.com/badges/github.com/center2m/opcua.svg)](https://golangci.com/r/github.com/center2m/opcua)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/center2m/opcua/blob/master/LICENSE)
 
 ## Quickstart
 
@@ -25,7 +25,7 @@ You need go1.11 or higher. We test with the current and previous Go version.
 # make sure you have go1.11 or higher
 
 # install library
-go get -u github.com/gopcua/opcua
+go get -u github.com/center2m/opcua
 
 # get current date and time 'ns=0;i=2258'
 go run examples/datetime/datetime.go -endpoint opc.tcp://localhost:4840
@@ -49,7 +49,7 @@ stable as possible. :)
 ### Current State (19 Apr 2019)
 
  * `ERR` messages are bubbled up to the caller
- * security protocol support. See https://github.com/gopcua/opcua/wiki/Supported-Devices
+ * security protocol support. See https://github.com/center2m/opcua/wiki/Supported-Devices
    to get a list of devices/applications we have tested various crypto and authentication
    methods. Please add your own. See `examples/crypto` for an example.
  * Debug messages are now disabled by default.
@@ -102,7 +102,7 @@ Also, if the library is already useful please spread the word as a motivation.
 
 ## Authors
 
-The [Gopcua Team](https://github.com/gopcua/opcua/graphs/contributors).
+The [Gopcua Team](https://github.com/center2m/opcua/graphs/contributors).
 
 ## Supported Features
 
@@ -174,4 +174,4 @@ The current set of supported services is only for the high-level client.
 
 ## License
 
-[MIT](https://github.com/gopcua/opcua/blob/master/LICENSE)
+[MIT](https://github.com/center2m/opcua/blob/master/LICENSE)

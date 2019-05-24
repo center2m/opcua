@@ -7,7 +7,7 @@ package uasc
 import (
 	"fmt"
 
-	"github.com/gopcua/opcua/ua"
+	"github.com/center2m/opcua/ua"
 )
 
 // SymmetricSecurityHeader represents a Symmetric Algorithm Security Header in OPC UA Secure Conversation.

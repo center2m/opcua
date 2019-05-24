@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/gopcua/opcua/debug"
+	"github.com/center2m/opcua/debug"
 )
 
 var (

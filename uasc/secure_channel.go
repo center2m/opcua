@@ -16,10 +16,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/gopcua/opcua/debug"
-	"github.com/gopcua/opcua/ua"
-	"github.com/gopcua/opcua/uacp"
-	"github.com/gopcua/opcua/uapolicy"
+	"github.com/center2m/opcua/debug"
+	"github.com/center2m/opcua/ua"
+	"github.com/center2m/opcua/uacp"
+	"github.com/center2m/opcua/uapolicy"
 )
 
 const (

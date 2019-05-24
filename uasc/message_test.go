@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gopcua/opcua/id"
+	"github.com/center2m/opcua/id"
 
-	"github.com/gopcua/opcua/ua"
+	"github.com/center2m/opcua/ua"
 )
 
 func TestMessage(t *testing.T) {

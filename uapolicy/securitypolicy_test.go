@@ -14,7 +14,7 @@ import (
 
 	"github.com/pascaldekloe/goe/verify"
 
-	"github.com/gopcua/opcua/ua"
+	"github.com/center2m/opcua/ua"
 )
 
 func TestSupportedPolicies(t *testing.T) {

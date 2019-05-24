@@ -7,8 +7,8 @@ package opcua
 import (
 	"time"
 
-	"github.com/gopcua/opcua/id"
-	"github.com/gopcua/opcua/ua"
+	"github.com/center2m/opcua/id"
+	"github.com/center2m/opcua/ua"
 )
 
 // Node is a high-level object to interact with a node in the

@@ -6,7 +6,7 @@
 
 package ua
 
-import "github.com/gopcua/opcua/id"
+import "github.com/center2m/opcua/id"
 
 func init() {
 	register(id.ServiceFault_Encoding_DefaultBinary, new(ServiceFault))

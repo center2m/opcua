@@ -5,8 +5,8 @@ import (
 	"crypto/x509"
 	"encoding/binary"
 
-	"github.com/gopcua/opcua/ua"
-	"github.com/gopcua/opcua/uapolicy"
+	"github.com/center2m/opcua/ua"
+	"github.com/center2m/opcua/uapolicy"
 )
 
 // signAndEncrypt encrypts the message bytes stored in b and returns the

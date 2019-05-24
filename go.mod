@@ -1,4 +1,4 @@
-module github.com/gopcua/opcua
+module github.com/center2m/opcua
 
 go 1.12
 

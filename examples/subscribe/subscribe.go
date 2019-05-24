@@ -9,8 +9,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/gopcua/opcua"
-	"github.com/gopcua/opcua/debug"
+	"github.com/center2m/opcua"
+	"github.com/center2m/opcua/debug"
 )
 
 func main() {

@@ -12,7 +12,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/gopcua/opcua/cmd/service/goname"
+	"github.com/center2m/opcua/cmd/service/goname"
 )
 
 var in, out, pkg string
@@ -259,7 +259,7 @@ var funcs = template.FuncMap{
 
 var tmplRegister = template.Must(template.New("").Funcs(funcs).Parse(`
 
-import "github.com/gopcua/opcua/id"
+import "github.com/center2m/opcua/id"
 
 func init() {
 	{{- range $i, $v := . -}}

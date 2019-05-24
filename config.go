@@ -11,9 +11,9 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/gopcua/opcua/ua"
-	"github.com/gopcua/opcua/uapolicy"
-	"github.com/gopcua/opcua/uasc"
+	"github.com/center2m/opcua/ua"
+	"github.com/center2m/opcua/uapolicy"
+	"github.com/center2m/opcua/uasc"
 )
 
 // DefaultClientConfig returns the default configuration for a client

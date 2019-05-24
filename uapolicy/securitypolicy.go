@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/gopcua/opcua/ua"
+	"github.com/center2m/opcua/ua"
 )
 
 // SupportedPolicies returns all supported Security Policies

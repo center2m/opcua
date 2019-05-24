@@ -13,10 +13,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/gopcua/opcua/id"
-	"github.com/gopcua/opcua/ua"
-	"github.com/gopcua/opcua/uacp"
-	"github.com/gopcua/opcua/uasc"
+	"github.com/center2m/opcua/id"
+	"github.com/center2m/opcua/ua"
+	"github.com/center2m/opcua/uacp"
+	"github.com/center2m/opcua/uasc"
 )
 
 // GetEndpoints returns the available endpoint descriptions for the server.
@@ -65,7 +65,7 @@ type Client struct {
 // To modify configuration you can provide any number of Options as opts. See
 // #Option for details.
 //
-// https://godoc.org/github.com/gopcua/opcua#Option
+// https://godoc.org/github.com/center2m/opcua#Option
 func NewClient(endpoint string, opts ...Option) *Client {
 	c := &Client{
 		endpointURL: endpoint,
