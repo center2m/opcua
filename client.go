@@ -439,6 +439,20 @@ func (c *Client) Browse(req *ua.BrowseRequest) (*ua.BrowseResponse, error) {
 	return res, err
 }
 
+// BrowseNext executes a synchronous browse request.
+func (c *Client) BrowseNext(req *ua.BrowseNextRequest) (*ua.BrowseNextResponse, error) {
+	var res *ua.BrowseNextResponse
+	err := c.Send(req, func(v interface{}) error {
+		r, ok := v.(*ua.BrowseNextResponse)
+		if !ok {
+			return fmt.Errorf("invalid response: %T", v)
+		}
+		res = r
+		return nil
+	})
+	return res, err
+}
+
 // todo(fs): this is not done yet since we need to be able to register
 // todo(fs): monitored items.
 type Subscription struct {
