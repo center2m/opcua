@@ -71,17 +71,6 @@ func (n *Node) DisplayName() (*ua.LocalizedText, error) {
 	return v.Value.(*ua.LocalizedText), nil
 }
 
-// AccessLevel returns the access level of the node.
-// The returned value is a mask where multiple values can be
-// set, e.g. read and write.
-func (n *Node) AccessLevel() (ua.AccessLevelType, error) {
-	v, err := n.Attribute(ua.AttributeIDAccessLevel)
-	if err != nil {
-		return 0, err
-	}
-	return ua.AccessLevelType(v.Value.(uint8)), nil
-}
-
 // HasAccessLevel returns true if all bits from mask are
 // set in the access level mask of the node.
 func (n *Node) HasAccessLevel(mask ua.AccessLevelType) (bool, error) {
